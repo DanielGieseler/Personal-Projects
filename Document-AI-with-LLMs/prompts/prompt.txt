@@ -1,0 +1,57 @@
+"""
+<_HTML_TABLE_>
+"""
+
+You will make the functional analysis of the HTML data-table above. Starting from the physical structure (composed of rows, columns, and spanning cells), you will determine the logical structure (composed of header, entries, and other).
+
+["Preliminary_Analysis"]
+For every row in the HTML table, classify it as containing information about one of three categories:
+- entry
+	- can be complete or partial (divided among rows)
+	- the first columns can be row-spanning, which is the stub.
+	- the last entry row can be cut/incomplete due to page break.
+- header
+	- usually at the top rows of the table, before entries.
+	- can contain: simple attributes, composite attributes, stub header.
+- other
+	- a super-row that spans across the table.
+	- can be: footer; title; caption; notes.
+
+["Header_Analysis"]
+Recapitulate every row that were classified as header by listing it in order.
+Then, decide the range of rows of the header of the table. If multiple headers, choose the first one.
+
+["Entries_Analysis"]
+Recapitulate every row that was classified as entry by listing it in order.
+Then, consolidate every entry, enumerating it with made-up indexes (1,2,3...) and deciding its range of covered rows.
+Aggregate rows according to the SMALLEST semantically coherent entry.
+Attention to not over aggregate rows by the row-spanning cells of the stub.
+
+{
+	"Preliminary_Analysis":{
+		"entry_type":<describe>, // what are the entries being listed
+		"row_count": <total_amount_of_rows>,
+		"rows":{
+			// list all 'tr' rows, ordered by the tag attribute 'i' (index)
+			<index>: <entry | header | other>
+			// ...
+		}
+	},
+	"Header_Analysis":{
+		"list_of_header_rows":[<row_index>, ...], // ordered
+		"header_row_range":[<start_row>, <end_row>]
+	},
+	"Entries_Analysis":{
+		"list_of_entries_rows":[<row_index>, ...], // ordered
+		"entries":{
+			<made_up_index>:[<start_row>, <end_row>],
+			// ...
+	}
+}
+
+Restrictions:
+- Strictly adhere to the JSON schema.
+- Include only requested information.
+- Your response should consist solely of the completed JSON.
+- Fill data in the placeholders <>.
+- Complete the analysis, regardless of size.
